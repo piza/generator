@@ -1,0 +1,83 @@
+package $!{controllerPackage};
+
+import java.util.List;
+import java.util.Map;
+import javax.validation.Valid;
+
+import $!{basePackage}.enums.ErrorTypeEnum;
+import $!{basePackage}.enums.NormalStatusEnum;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+import $!{basePackage}.bean.PagingProperties;
+
+import $!{modelPackage}.$!{modelClass};
+import $!{modelPackage}.$!{modelClass}Example;
+import $!{servicePackage}.$!{modelClass}Service;
+import $!{validatorPackage}.$!{modelClass}Validator;
+
+
+
+@Controller
+@RequestMapping("/$!{modelClassParam}")
+public class $!{modelClass}Controller extends BaseController {
+
+    @Autowired
+    private $!{modelClass}Service $!{modelClassParam}Service;
+
+    @InitBinder(value = "$!{modelClassParam}")
+    public void initBinder(WebDataBinder binder) {
+        binder.setValidator(new $!{modelClass}Validator());
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> insert(@Valid @RequestBody $!{modelClass} $!{modelClassParam}, BindingResult result) {
+        if (result.hasErrors()) {
+            return failedResult(ErrorTypeEnum.VALIDATE_ERROR, result.getAllErrors().get(0).getDefaultMessage());
+        }
+        $!{modelClassParam}Service.insert($!{modelClassParam});
+        return successResult($!{modelClassParam});
+    }
+
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Map<String, Object> delete(@PathVariable("id") Integer id) {
+        $!{modelClass} delete = new $!{modelClass}();
+        delete.setId(id);
+        delete.setStatus(NormalStatusEnum.DELETED.getValue());
+        $!{modelClassParam}Service.updateByPrimaryKeySelective(delete);
+        return successResult("Ok");
+    }
+
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> list(PagingProperties paging) {
+        $!{modelClass}Example exam = new $!{modelClass}Example();
+        if(paging.getNeedPaging()) {
+            paging.setTotal($!{modelClassParam}Service.countByExample(exam));
+            exam.setOrderByClause(" id desc " + paging.build());
+        }
+        List<$!{modelClass}> list = $!{modelClassParam}Service.selectByExample(exam);
+        return successPageList(paging,list);
+    }
+
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> get(@PathVariable("id") Integer id) {
+        return successResult($!{modelClassParam}Service.selectByPrimaryKey(id));
+    }
+
+    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+    @ResponseBody
+    public Map<String, Object> update(@PathVariable("id") Integer id, @Valid @RequestBody $!{modelClass} $!{modelClassParam}, BindingResult result) {
+        if (result.hasErrors()) {
+            return failedResult(ErrorTypeEnum.VALIDATE_ERROR, result.getAllErrors().get(0).getDefaultMessage());
+        }
+        $!{modelClassParam}Service.updateByPrimaryKeySelective($!{modelClassParam});
+        return successResult("ok");
+    }
+
+}

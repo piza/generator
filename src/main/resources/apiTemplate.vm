@@ -1,0 +1,127 @@
+package $!{apiPackage};
+
+import java.util.List;
+import java.util.Map;
+
+import $!{basePackage}.enums.ErrorTypeEnum;
+import $!{basePackage}.enums.NormalStatusEnum;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import $!{basePackage}.bean.PagingProperties;
+import $!{basePackage}.annotation.ApicloudRequestBody;
+import $!{basePackage}.controller.BaseController;
+
+
+import $!{modelPackage}.$!{modelClass};
+import $!{modelPackage}.$!{modelClass}Example;
+import $!{servicePackage}.$!{modelClass}Service;
+
+
+@Controller
+@RequestMapping("/api/$!{modelClassParam}")
+public class $!{modelClass}API extends BaseController {
+
+    @Autowired
+    private $!{modelClass}Service $!{modelClassParam}Service;
+
+    /**
+    * @api {POST} $!{modelClassParam} 添加一条$!{modelClassParam}记录
+    * @apiVersion 1.0.0
+    * @apiName $!{modelClassParam} insert
+    * @apiGroup  $!{modelClassParam}
+    * @apiDescription 该api返回一个json对象
+    * @apiParam {json} content 有些值不用提交，服务器端会设置，比如id,createDate,status等
+    * @apiParamExample {json} 提交数据:
+    * $!{jsonComment}
+    * @apiSuccessExample {json} 返回数据,会把id，createDate这些值一起返回:
+    * {
+    *  "success":
+    *           $!{jsonComment}
+    * }
+    */
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> insert(@ApicloudRequestBody("content") $!{modelClass} $!{modelClassParam}) {
+        $!{modelClassParam}Service.insert($!{modelClassParam});
+        return successResult($!{modelClassParam});
+    }
+
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Map<String, Object> delete(@PathVariable("id") Integer id) {
+        $!{modelClass} delete = new $!{modelClass}();
+        delete.setId(id);
+        delete.setStatus(NormalStatusEnum.DELETED.getValue());
+        $!{modelClassParam}Service.updateByPrimaryKeySelective(delete);
+        return successResult("Ok");
+    }
+
+    /**
+    * @api {get} $!{modelClassParam}/list 获取$!{modelClassParam}列表
+    * @apiVersion 1.0.0
+    * @apiName $!{modelClassParam} list
+    * @apiGroup  $!{modelClassParam}
+    * @apiParam {Integer} page 第几页，默认第一页
+    * @apiParam {Integer} perPage 每页几条记录 默认10条
+    * @apiParam {Boolean} needPaging 是否需要分页,默认true,如不需要分页,设置为false，就会返回全部数据
+    * @apiParamExample {String} url参数例子:
+    * $!{modelClassParam}/list?page=2&perPage=30
+    * @apiDescription 该api返回一个json对象
+    * @apiSuccessExample {json} 成功数据
+    * {
+    *  "success":{
+    *       "pagingInfo":{
+    *       "page":0,
+    *       "perPage":10
+    *       "total":21
+    *       "needPaging":true
+    *       "start":0
+    *       },
+    *       "models":[
+    *           $!{jsonComment}
+    *           ]
+    *       }
+    * }
+    */
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> list(PagingProperties paging) {
+        $!{modelClass}Example exam = new $!{modelClass}Example();
+        if(paging.getNeedPaging()) {
+            paging.setTotal($!{modelClassParam}Service.countByExample(exam));
+            exam.setOrderByClause(" id desc " + paging.build());
+        }
+        List<$!{modelClass}> list = $!{modelClassParam}Service.selectByExample(exam);
+        return successPageList(paging,list);
+    }
+
+
+    /**
+    * @api {get} $!{modelClassParam}/:id 获取一条$!{modelClassParam}记录
+    * @apiVersion 1.0.0
+    * @apiName $!{modelClassParam} get
+    * @apiGroup  $!{modelClassParam}
+    * @apiDescription 该api返回一个json对象
+    * @apiParam {Integer} id 主键id
+    * @apiSuccessExample {json} 成功数据
+    * {
+    *  "success":
+    *           $!{jsonComment}
+    * }
+    */
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> get(@PathVariable("id") Integer id) {
+        return successResult($!{modelClassParam}Service.selectByPrimaryKey(id));
+    }
+
+
+    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+    @ResponseBody
+    public Map<String, Object> update(@PathVariable("id") Integer id, @ApicloudRequestBody("content") $!{modelClass} $!{modelClassParam}) {
+        $!{modelClassParam}Service.updateByPrimaryKeySelective($!{modelClassParam});
+        return successResult("ok");
+    }
+
+}

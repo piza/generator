@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <properties resource="config_education.properties" />
+    <classPathEntry location="/Users/hong/Desktop/sharelibs/mysql-connector-java-5.1.11.jar"/>
+    <context id="defaultContext" targetRuntime="MyBatis3">
+        <plugin type="org.peter.generator.plugin.MobileApiPlugin"/>
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/education?useUnicode=true&amp;characterEncoding=utf-8" userId="root" password="dabing" />
+        <javaModelGenerator targetPackage="com.ktb.model" targetProject="${outputPath}/src/" />
+        <sqlMapGenerator targetPackage="orm" targetProject="${outputPath}/resources/" />
+        <javaClientGenerator targetPackage="com.ktb.dao" targetProject="${outputPath}/src/" type="XMLMAPPER" />
+
+
+        <!--<table schema="education" tableName="class_info" domainObjectName="ClassInfo">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table schema="education" tableName="course_chapter" domainObjectName="CourseChapter">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table schema="education" tableName="course_info" domainObjectName="CourseInfo">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table schema="education" tableName="exam_paper" domainObjectName="ExamPaper">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table schema="education" tableName="exam_record" domainObjectName="ExamRecord">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table schema="education" tableName="exam_record_answer" domainObjectName="ExamRecordAnswer">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table schema="education" tableName="forum_posts" domainObjectName="ForumPosts">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+
+        <!--<table schema="education" tableName="forum_posts_follow" domainObjectName="ForumPostsFollow">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+
+        <!--<table schema="education" tableName="message_info" domainObjectName="MessageInfo">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table schema="education" tableName="posts_comment" domainObjectName="PostsComment">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table schema="education" tableName="question" domainObjectName="Question">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table schema="education" tableName="question_option" domainObjectName="QuestionOption">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table schema="education" tableName="teach_notify" domainObjectName="TeachNotify">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <table schema="education" tableName="user_account" domainObjectName="UserAccount">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <!--<table schema="education" tableName="video_watch_record" domainObjectName="VideoWatchRecord">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+
+        <!--<table schema="education" tableName="forum_posts_image" domainObjectName="ForumPostsImage">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table schema="education" tableName="user_feedback" domainObjectName="UserFeedback">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table schema="education" tableName="app_version" domainObjectName="AppVersion">-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,19 @@
+package $!{validatorPackage};
+
+import $!{modelPackage}.$!{modelClass};
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
+
+
+public class $!{modelClass}Validator implements Validator {
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return $!{modelClass}.class.equals(clazz);
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
+    }
+}

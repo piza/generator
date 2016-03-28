@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <properties resource="config_portal.properties" />
+    <classPathEntry location="/Users/hong/Desktop/sharelibs/mysql-connector-java-5.1.11.jar"/>
+    <context id="defaultContext">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/${database}?useUnicode=true&amp;characterEncoding=utf-8" userId="root" password="dabing" />
+        <javaModelGenerator targetPackage="${basePackage}.model" targetProject="${outputPath}/src/" />
+        <sqlMapGenerator targetPackage="orm" targetProject="${outputPath}/resources/" />
+        <javaClientGenerator targetPackage="${basePackage}.dao" targetProject="${outputPath}/src/" type="XMLMAPPER" />
+
+        <!--</table>-->
+        <!--<table schema="${database}" tableName="daily_note" domainObjectName="DailyNote">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <table schema="${database}" tableName="authority" domainObjectName="Authority">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="${database}" tableName="favorite_site" domainObjectName="FavoriteSite">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="${database}" tableName="member_info" domainObjectName="MemberInfo">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="${database}" tableName="role" domainObjectName="Role">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="${database}" tableName="role_authority_map" domainObjectName="RoleAuthorityMap">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="${database}" tableName="user_info" domainObjectName="UserInfo">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="${database}" tableName="user_info_role_map" domainObjectName="UserInfoRoleMap">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="${database}" tableName="user_log" domainObjectName="UserLog">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="${database}" tableName="weixin_account" domainObjectName="WeixinAccount">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+    </context>
+</generatorConfiguration>

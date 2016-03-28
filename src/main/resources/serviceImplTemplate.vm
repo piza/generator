@@ -1,0 +1,18 @@
+package $!{servicePackage}.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import $!{daoPackage}.$!{modelClass}Mapper;
+import $!{modelPackage}.$!{modelClass};
+import $!{modelPackage}.$!{modelClass}Example;
+import $!{servicePackage}.$!{modelClass}Service;
+
+@Service
+public class $!{modelClass}ServiceImpl extends BaseServiceImpl<$!{modelClass}, $!{modelClass}Example, Integer> implements $!{modelClass}Service {
+
+    @Autowired
+    public void setBaseMapper($!{modelClass}Mapper mapper) {
+        this.baseMapper = mapper;
+    }
+}

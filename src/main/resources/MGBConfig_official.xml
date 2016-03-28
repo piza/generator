@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <properties resource="config_official.properties" />
+    <classPathEntry location="/Users/hong/Desktop/sharelibs/mysql-connector-java-5.1.11.jar"/>
+    <context id="defaultContext">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/${database}?useUnicode=true&amp;characterEncoding=utf-8" userId="root" password="dabing" />
+        <javaModelGenerator targetPackage="${basePackage}.model" targetProject="${outputPath}/src/" />
+        <sqlMapGenerator targetPackage="orm" targetProject="${outputPath}/resources/" />
+        <javaClientGenerator targetPackage="${basePackage}.dao" targetProject="${outputPath}/src/" type="XMLMAPPER" />
+
+        <!--<table schema="${database}" tableName="base_info" domainObjectName="BaseInfo">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+
+        <table schema="${database}" tableName="article" domainObjectName="Article">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="${database}" tableName="system_config" domainObjectName="SystemConfig">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="${database}" tableName="staff" domainObjectName="Staff">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="${database}" tableName="user_log" domainObjectName="UserLog">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+    </context>
+</generatorConfiguration>
